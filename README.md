@@ -1,6 +1,6 @@
 # ChatGPT Clone with MERN Stack
 
-![Screenshot 2023-09-05 at 10 42 16 PM (2)](https://github.com/Nikayel/mern-infrastructure/assets/65195892/f700d4fe-7db2-43cc-a4d9-70de4d323160)
+![Screenshot 2023-09-05 at 11 01 27 PM (2)](https://github.com/Nikayel/mern-infrastructure/assets/65195892/66802630-8d31-4752-9239-8f95a3139374)
 
 
 ## Table of Contents
