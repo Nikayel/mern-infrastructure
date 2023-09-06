@@ -31,8 +31,6 @@ The goal of this project is to provide a versatile and user-friendly interface f
 
 - **Sci-Fi Image Generation:** Generate imaginative sci-fi images by providing a prompt or description. Perfect for creative projects.
 
-- **[Add more features here]**
-
 ## Getting Started
 
 ### Installation

@@ -1,24 +1,30 @@
+/* Reset default margin, padding, and box-sizing for all elements */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Set a sensible default font family */
 body {
-  font-family: "roboto", sans-serif;
+  font-family: "Roboto", sans-serif; /* Use correct font name and case */
 }
 
+/* Style links */
 a {
-  color: #60bf70 !important;
+  color: #60bf70; /* Remove !important unless absolutely necessary */
   text-decoration: none;
-  padding: 20px;
-  margin-top: 20px;
+  padding: 10px 20px; /* Reduced padding for a cleaner look */
+  margin: 10px 0; /* Adjust margin for better spacing between links */
+  transition: color 0.3s; /* Add a smooth color transition */
 }
 
+/* Hover effect for links */
 a:hover {
-  color: black !important;
+  color: #000; /* Use a subtle color change on hover */
 }
 
+/* Style the active link (you can add this class dynamically) */
 a.active {
-  color: #57d96d !important;
+  color: #57d96d; /* Highlight active links with a different color */
 }
