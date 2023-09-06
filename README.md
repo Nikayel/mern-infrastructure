@@ -39,5 +39,8 @@ The goal of this project is to provide a versatile and user-friendly interface f
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/your-repo.git
+   git clone https://github.com/Nikayel/your-repo.git
    ```
+
+Contributing
+Contributions are welcome! If you'd like to contribute to this project, please follow the standard GitHub fork and pull request workflow.
