@@ -1,37 +1,41 @@
-const express = require('express');
-const path = require('path');
-const favicon = require('serve-favicon');
-const logger = require('morgan');
-// Always require and configure near the top
-require('dotenv').config();
-// Connect to the database
-require('./config/database');
+const express = require("express");
+const morgan = require("morgan");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const colors = require("colors");
+const dotenv = require("dotenv");
+const connectDB = require("./config/database");
+const errorHandler = require("./middlewares/errorMiddleware");
 
+//routes path
+const authRoutes = require("./routes/users");
+
+//dotenv
+dotenv.config();
+
+//mongo connection
+connectDB();
+
+//rest object
 const app = express();
 
-app.use(logger('dev'));
+//middlewares
+app.use(cors());
 app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(morgan("dev"));
+app.use(errorHandler);
 
-// Configure both serve-favicon & static middleware
-// to serve from the production 'build' folder
-app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
-app.use(express.static(path.join(__dirname, 'build')));
+const PORT = process.env.PORT || 3001;
 
-// Middleware to check and verify a JWT and
-// assign the user object from the JWT to req.user
-app.use(require('./config/checkToken'));
+//API routes
+app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/openai", require("./routes/openaiRoutes"));
 
-const port = process.env.PORT || 3001;
-
-// Put API routes here, before the "catch all" route
-app.use('/api/users', require('./routes/api/users'));
-
-// The following "catch all" route (note the *) is necessary
-// to return the index.html on all non-AJAX/API requests
-app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
-
-app.listen(port, function() {
-  console.log(`Express app running on port ${port}`);
+//listen server
+app.listen(PORT, () => {
+  console.log(
+    `Server Running in ${process.env.DEV_MODE} mode on port no ${PORT}`.bgCyan
+      .white
+  );
 });

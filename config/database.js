@@ -1,9 +1,15 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
+const colors = require("colors");
 
-mongoose.connect(process.env.DATABASE_URL);
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.DATABASE_URL);
+    console.log(
+      `Connected To Mongodb Database ${mongoose.connection.host}`.bgGreen.white
+    );
+  } catch (error) {
+    console.log(`Mognodb Database Error ${error}`.bgRed.white);
+  }
+};
 
-const db = mongoose.connection;
-
-db.on('connected', function () {
-  console.log(`Connected to ${db.name} at ${db.host}:${db.port}`);
-});
+module.exports = connectDB;
