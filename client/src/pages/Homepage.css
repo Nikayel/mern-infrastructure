@@ -1,0 +1,31 @@
+.homepage-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+  }
+  
+  .sci-fi-card {
+    border-radius: 5px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease-in-out;
+    background-color: #000; /* Dark background */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+    color: #00FF00; /* Green text color */
+  }
+  
+  .sci-fi-card:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+  }
+  
+  .sci-fi-card:hover .MuiSvgIcon-root {
+    transform: scale(1.2);
+  }
+  
+  /* Add any additional sci-fi styling here */
+  

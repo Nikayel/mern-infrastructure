@@ -17,14 +17,11 @@ import {
 const Summary = () => {
   const theme = useTheme();
   const navigate = useNavigate();
-  // Media query
   const isNotMobile = useMediaQuery("(min-width: 1000px)");
-  // States
   const [text, setText] = useState("");
   const [summary, setSummary] = useState("");
   const [error, setError] = useState("");
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -33,7 +30,7 @@ const Summary = () => {
     } catch (err) {
       if (err.response.data.error) {
         setError(err.response.data.error);
-      } else if (err.message) {
+      } else if ( err.message) {
         setError(err.message);
       }
       setTimeout(() => {
@@ -52,6 +49,10 @@ const Summary = () => {
         boxShadow: 5,
         backgroundColor: "#000", // Dark background
         color: "#00FF00", // Green text color
+        transition: "transform 0.2s ease-in-out", // Add transition
+        "&:hover": {
+          transform: "scale(1.05)", // Scale up on hover
+        },
       }}
     >
       <Collapse in={error}>
@@ -83,12 +84,31 @@ const Summary = () => {
           fullWidth
           variant="contained"
           size="large"
-          sx={{ color: "#00FF00", mt: 2, backgroundColor: "#222" }} // Dark button
+          sx={{
+            color: "#00FF00",
+            mt: 2,
+            backgroundColor: "#007bff", // Blue button background
+            "&:hover": {
+              backgroundColor: "#0056b3", // Darker blue on hover
+            },
+          }}
         >
           Submit
         </Button>
         <Typography mt={2} sx={{ color: "#00FF00" }}>
-          Not this tool? <Link to="/" style={{ color: "#00FF00" }}>GO BACK</Link>
+          Not this tool?{" "}
+          <Link to="/" style={{ color: "#00FF00" }}>
+            <Button
+              variant="outlined"
+              color="primary"
+              sx={{
+                borderColor: "#007bff", // Blue border for the outlined button
+                color: "#007bff", // Blue text color for the outlined button
+              }}
+            >
+              GO BACK
+            </Button>
+          </Link>
         </Typography>
       </form>
 

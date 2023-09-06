@@ -12,6 +12,7 @@ import DescriptionRoundedIcon from "@mui/icons-material/DescriptionRounded";
 import FormatAlignLeftOutlinedIcon from "@mui/icons-material/FormatAlignLeftOutlined";
 import ChatRoundedIcon from "@mui/icons-material/ChatRounded";
 import ImageIcon from "@mui/icons-material/Image";
+import "./Homepage.css";
 
 const Homepage = () => {
   const navigate = useNavigate();
@@ -54,26 +55,12 @@ const Homepage = () => {
   ];
 
   return (
-    <Grid container spacing={3}>
+    <Grid container spacing={3} className="homepage-grid">
       {cardsData.map((card, index) => (
         <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
           <Card
             onClick={() => navigate(card.path)}
-            sx={{
-              borderRadius: 2,
-              height: "100%",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              transition: "transform 0.2s ease-in-out",
-              backgroundColor: "#FFFFFF", // White background
-              boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)", // Subtle shadow
-              "&:hover": {
-                transform: "scale(1.05)",
-                cursor: "pointer",
-              },
-            }}
+            className="sci-fi-card"
           >
             {card.icon}
             <CardContent>

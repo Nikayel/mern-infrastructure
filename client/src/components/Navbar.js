@@ -25,11 +25,12 @@ const Navbar = () => {
   return (
     <Box
       width="100%"
-      bgcolor="#222" // Dark background color
+      bgcolor="#2E3B4E" // Updated background color
       p="1rem 6%"
       textAlign="center"
       boxShadow={3}
       mb={2}
+      sx={{ transition: "background-color 0.3s" }} // Add transition effect
     >
       <Typography variant="h4" color="primary" fontWeight="bold" gutterBottom>
         AI Friend
@@ -42,11 +43,14 @@ const Navbar = () => {
                 color="primary"
                 variant="contained" // Filled button style
                 mx={1}
-                style={{
-                  backgroundColor: "#00FF00", // Green color
-                  color: "#222", // Dark text color
+                sx={{
+                  backgroundColor: "#00B050", // Updated green color
+                  color: "#fff", // White text color
                   fontFamily: "monospace",
                   fontWeight: "bold",
+                  "&:hover": {
+                    backgroundColor: "#008940", // Darker green on hover
+                  },
                 }}
               >
                 Home
@@ -57,11 +61,14 @@ const Navbar = () => {
               color="primary"
               variant="contained" // Filled button style
               mx={1}
-              style={{
-                backgroundColor: "#FF0000", // Red color
-                color: "#222", // Dark text color
+              sx={{
+                backgroundColor: "#FF3D00", // Updated red color
+                color: "#fff", // White text color
                 fontFamily: "monospace",
                 fontWeight: "bold",
+                "&:hover": {
+                  backgroundColor: "#D13000", // Darker red on hover
+                },
               }}
             >
               Logout
@@ -74,11 +81,14 @@ const Navbar = () => {
                 color="primary"
                 variant="contained" // Filled button style
                 mx={1}
-                style={{
-                  backgroundColor: "#00FF00", // Green color
-                  color: "#222", // Dark text color
+                sx={{
+                  backgroundColor: "#00B050", // Updated green color
+                  color: "#fff", // White text color
                   fontFamily: "monospace",
                   fontWeight: "bold",
+                  "&:hover": {
+                    backgroundColor: "#008940", // Darker green on hover
+                  },
                 }}
               >
                 Sign Up
@@ -89,11 +99,14 @@ const Navbar = () => {
                 color="primary"
                 variant="contained" // Filled button style
                 mx={1}
-                style={{
-                  backgroundColor: "#FF0000", // Red color
-                  color: "#222", // Dark text color
+                sx={{
+                  backgroundColor: "#FF3D00", // Updated red color
+                  color: "#fff", // White text color
                   fontFamily: "monospace",
                   fontWeight: "bold",
+                  "&:hover": {
+                    backgroundColor: "#D13000", // Darker red on hover
+                  },
                 }}
               >
                 Sign In

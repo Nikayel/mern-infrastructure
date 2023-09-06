@@ -12,21 +12,22 @@ import {
   Alert,
   Collapse,
   Card,
+  CircularProgress, // Add CircularProgress for loading animation
+  Fade, // Add Fade for transitions
 } from "@mui/material";
 
 const ScifiImage = () => {
   const theme = useTheme();
   const navigate = useNavigate();
-  //media
   const isNotMobile = useMediaQuery("(min-width: 1000px)");
-  // states
   const [text, settext] = useState("");
   const [image, setImage] = useState("");
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // Track loading state
 
-  //register ctrl
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true); // Start loading animation
     try {
       const { data } = await axios.post("/api/v1/openai/scifi-image", { text });
       console.log(data);
@@ -41,8 +42,11 @@ const ScifiImage = () => {
       setTimeout(() => {
         setError("");
       }, 5000);
+    } finally {
+      setIsLoading(false); // Stop loading animation
     }
   };
+
   return (
     <Box
       width={isNotMobile ? "40%" : "80%"}
@@ -61,7 +65,7 @@ const ScifiImage = () => {
         <Typography variant="h3">Scifi Image</Typography>
 
         <TextField
-          placeholder="add your text"
+          placeholder="Add your text"
           type="text"
           multiline={true}
           required
@@ -78,31 +82,56 @@ const ScifiImage = () => {
           fullWidth
           variant="contained"
           size="large"
-          sx={{ color: "white", mt: 2 }}
+          sx={{
+            backgroundColor: "#007bff",
+            color: "white",
+            mt: 2,
+            "&:hover": {
+              backgroundColor: "#0056b3", // Darker blue on hover
+            },
+          }}
         >
-          Submit
+          {isLoading ? ( // Show loading animation if isLoading is true
+            <CircularProgress size={24} color="inherit" />
+          ) : (
+            "Submit"
+          )}
         </Button>
         <Typography mt={2}>
-          not this tool ? <Link to="/">GO BACK</Link>
+          Not this tool?{" "}
+          <Link to="/" style={{ color: "#007bff" }}>
+            <Button
+              variant="outlined"
+              color="primary"
+              sx={{
+                borderColor: "#007bff",
+                color: "#007bff",
+              }}
+            >
+              GO BACK
+            </Button>
+          </Link>
         </Typography>
       </form>
 
       {image ? (
-        <Card
-          sx={{
-            mt: 4,
-            border: 1,
-            boxShadow: 0,
-            height: "500px",
-            borderRadius: 5,
-            borderColor: "natural.medium",
-            bgcolor: "background.default",
-          }}
-        >
-          <Box sx={{ display: "flex", justifyContent: "center", my: 5 }}>
-            <img src={image} alt="scifiimage" />
-          </Box>
-        </Card>
+        <Fade in={true}>
+          <Card
+            sx={{
+              mt: 4,
+              border: 1,
+              boxShadow: 0,
+              height: "500px",
+              borderRadius: 5,
+              borderColor: "natural.medium",
+              bgcolor: "background.default",
+            }}
+          >
+            <Box sx={{ display: "flex", justifyContent: "center", my: 5 }}>
+              <img src={image} alt="scifiimage" />
+            </Box>
+          </Card>
+        </Fade>
       ) : (
         <Card
           sx={{
@@ -120,11 +149,11 @@ const ScifiImage = () => {
             color="natural.main"
             sx={{
               textAlign: "center",
-              verticalAlign: "middel",
+              verticalAlign: "middle",
               lineHeight: "450px",
             }}
           >
-            Your Scifi Image Will Apprea Here
+            Your Scifi Image Will Appear Here
           </Typography>
         </Card>
       )}

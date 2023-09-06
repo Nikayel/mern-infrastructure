@@ -12,27 +12,24 @@ import {
   Alert,
   Collapse,
   Card,
+  Icon, // Import Icon from Material-UI
 } from "@mui/material";
 
 const Paragraph = () => {
   const theme = useTheme();
   const navigate = useNavigate();
-  //media
+
   const isNotMobile = useMediaQuery("(min-width: 1000px)");
-  // states
   const [text, settext] = useState("");
   const [para, setPara] = useState("");
   const [error, setError] = useState("");
 
-  //register ctrl
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const { data } = await axios.post("/api/v1/openai/paragraph", { text });
-      console.log(data);
       setPara(data);
     } catch (err) {
-      console.log(error);
       if (err.response.data.error) {
         setError(err.response.data.error);
       } else if (err.message) {
@@ -43,6 +40,7 @@ const Paragraph = () => {
       }, 5000);
     }
   };
+
   return (
     <Box
       width={isNotMobile ? "40%" : "80%"}
@@ -61,7 +59,7 @@ const Paragraph = () => {
         <Typography variant="h3">Generate Paragraph</Typography>
 
         <TextField
-          placeholder="add your text"
+          placeholder="Add your text"
           type="text"
           multiline={true}
           required
@@ -78,12 +76,17 @@ const Paragraph = () => {
           fullWidth
           variant="contained"
           size="large"
-          sx={{ color: "white", mt: 2 }}
+          sx={{ backgroundColor: "#007bff", color: "white", mt: 2 }}
         >
           Generate
         </Button>
         <Typography mt={2}>
-          not this tool ? <Link to="/">GO BACK</Link>
+          Not what you're looking for?{" "}
+          <Link to="/">
+            <Button variant="outlined" color="primary">
+              GO BACK
+            </Button>
+          </Link>
         </Typography>
       </form>
 
@@ -113,17 +116,41 @@ const Paragraph = () => {
             bgcolor: "background.default",
           }}
         >
-          <Typography
-            variant="h5"
-            color="natural.main"
-            sx={{
-              textAlign: "center",
-              verticalAlign: "middel",
-              lineHeight: "450px",
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              height: "100%",
+              flexDirection: "column",
             }}
           >
-            Your Paragraph Will Apprea Here
-          </Typography>
+            {/* Add Material-UI icons here */}
+            <Icon
+              color="primary"
+              fontSize="large"
+              style={{ marginBottom: "16px" }}
+            >
+              insert_emoticon
+            </Icon>
+            <Typography
+              variant="h5"
+              color="natural.main"
+              sx={{
+                textAlign: "center",
+                mt: 2,
+              }}
+            >
+              Your Paragraph Will Appear Here
+            </Typography>
+            <Icon
+              color="secondary"
+              fontSize="large"
+              style={{ marginTop: "16px" }}
+            >
+              insert_emoticon
+            </Icon>
+          </div>
         </Card>
       )}
     </Box>

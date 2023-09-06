@@ -12,21 +12,21 @@ import {
   Alert,
   Collapse,
   Card,
+  Slide, // Add Slide for transition
 } from "@mui/material";
 
 const JsConverter = () => {
   const theme = useTheme();
   const navigate = useNavigate();
-  //media
   const isNotMobile = useMediaQuery("(min-width: 1000px)");
-  // states
   const [text, settext] = useState("");
   const [code, setCode] = useState("");
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  //register ctrl
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const { data } = await axios.post("/api/v1/openai/js-converter", {
         text,
@@ -43,95 +43,127 @@ const JsConverter = () => {
       setTimeout(() => {
         setError("");
       }, 5000);
+    } finally {
+      setIsLoading(false);
     }
   };
+
   return (
-    <Box
-      width={isNotMobile ? "40%" : "80%"}
-      p={"2rem"}
-      m={"2rem auto"}
-      borderRadius={5}
-      sx={{ boxShadow: 5 }}
-      backgroundColor={theme.palette.background.alt}
-    >
-      <Collapse in={error}>
-        <Alert severity="error" sx={{ mb: 2 }}>
-          {error}
-        </Alert>
-      </Collapse>
-      <form onSubmit={handleSubmit}>
-        <Typography variant="h3">JS Converter</Typography>
+    <Slide direction="up" in={true} mountOnEnter unmountOnExit>
+      <Box
+        width={isNotMobile ? "40%" : "80%"}
+        p={"2rem"}
+        m={"2rem auto"}
+        borderRadius={5}
+        sx={{
+          boxShadow: 5,
+          backgroundColor: theme.palette.background.alt,
+        }}
+      >
+        <Collapse in={error}>
+          <Alert severity="error" sx={{ mb: 2 }}>
+            {error}
+          </Alert>
+        </Collapse>
+        <form onSubmit={handleSubmit}>
+          <Typography variant="h3">JS Converter</Typography>
 
-        <TextField
-          placeholder="add your text"
-          type="text"
-          multiline={true}
-          required
-          margin="normal"
-          fullWidth
-          value={text}
-          onChange={(e) => {
-            settext(e.target.value);
-          }}
-        />
+          <TextField
+            placeholder="Add your text"
+            type="text"
+            multiline={true}
+            required
+            margin="normal"
+            fullWidth
+            value={text}
+            onChange={(e) => {
+              settext(e.target.value);
+            }}
+          />
 
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          size="large"
-          sx={{ color: "white", mt: 2 }}
-        >
-          Convert
-        </Button>
-        <Typography mt={2}>
-          not this tool ? <Link to="/">GO BACK</Link>
-        </Typography>
-      </form>
-
-      {code ? (
-        <Card
-          sx={{
-            mt: 4,
-            border: 1,
-            boxShadow: 0,
-            height: "500px",
-            borderRadius: 5,
-            borderColor: "natural.medium",
-            bgcolor: "background.default",
-            overflow: "auto",
-          }}
-        >
-          <pre>
-            <Typography p={2}>{code}</Typography>
-          </pre>
-        </Card>
-      ) : (
-        <Card
-          sx={{
-            mt: 4,
-            border: 1,
-            boxShadow: 0,
-            height: "500px",
-            borderRadius: 5,
-            borderColor: "natural.medium",
-            bgcolor: "background.default",
-          }}
-        >
-          <Typography
-            variant="h5"
-            color="natural.main"
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            size="large"
             sx={{
-              textAlign: "center",
-              verticalAlign: "middel",
-              lineHeight: "450px",
+              color: "white",
+              mt: 2,
+              backgroundColor: "#007bff",
+              "&:hover": {
+                backgroundColor: "#0056b3",
+              },
             }}
           >
-            Your Code Will Apprea Here
+            {isLoading ? (
+              <div style={{ display: "flex", alignItems: "center" }}>
+                Loading...
+              </div>
+            ) : (
+              "Convert"
+            )}
+          </Button>
+          <Typography mt={2}>
+            Not this tool?{" "}
+            <Link to="/" style={{ color: "#007bff" }}>
+              <Button
+                variant="outlined"
+                color="primary"
+                sx={{
+                  borderColor: "#007bff",
+                  color: "#007bff",
+                }}
+              >
+                GO BACK
+              </Button>
+            </Link>
           </Typography>
-        </Card>
-      )}
-    </Box>
+        </form>
+
+        {code ? (
+          <Card
+            sx={{
+              mt: 4,
+              border: 1,
+              boxShadow: 0,
+              height: "500px",
+              borderRadius: 5,
+              borderColor: "natural.medium",
+              bgcolor: "background.default",
+              overflow: "auto",
+            }}
+          >
+            <pre>
+              <Typography p={2}>{code}</Typography>
+            </pre>
+          </Card>
+        ) : (
+          <Card
+            sx={{
+              mt: 4,
+              border: 1,
+              boxShadow: 0,
+              height: "500px",
+              borderRadius: 5,
+              borderColor: "natural.medium",
+              bgcolor: "background.default",
+            }}
+          >
+            <Typography
+              variant="h5"
+              color="natural.main"
+              sx={{
+                textAlign: "center",
+                verticalAlign: "middle",
+                lineHeight: "450px",
+              }}
+            >
+              Your Code Will Appear Here
+            </Typography>
+          </Card>
+        )}
+      </Box>
+    </Slide>
   );
 };
 
