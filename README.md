@@ -43,3 +43,7 @@ The goal of this project is to provide a versatile and user-friendly interface f
 
 Contributing
 Contributions are welcome! If you'd like to contribute to this project, please follow the standard GitHub fork and pull request workflow.
+##Trello
+```bash
+!https://trello.com/b/4F4Vf2Df/ai-friend
+```
