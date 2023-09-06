@@ -2,7 +2,6 @@
 
 ![Screenshot 2023-09-05 at 11 01 27 PM (2)](https://github.com/Nikayel/mern-infrastructure/assets/65195892/66802630-8d31-4752-9239-8f95a3139374)
 
-
 ## Table of Contents
 
 - [About](#about)
@@ -38,7 +37,8 @@ The goal of this project is to provide a versatile and user-friendly interface f
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/Nikayel/your-repo.git
+   git clone https://github.com/Nikayel/mern-infrastructure
+   .git
    ```
 
 Contributing
