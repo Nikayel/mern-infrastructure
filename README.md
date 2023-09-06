@@ -46,6 +46,9 @@ Contributions are welcome! If you'd like to contribute to this project, please f
 
 
 <h1>##Trello</h1>
+. 
+. 
+.
 ```bash
-!https://trello.com/b/4F4Vf2Df/ai-friend
+https://trello.com/b/4F4Vf2Df/ai-friend
 ```
